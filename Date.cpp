@@ -31,13 +31,18 @@ std::string Date::enterDate()
 
 bool Date::verify(std::string& date)
 {
-	int tempDate;
-	tempDate = dateToInt(date);
+	std::regex datePattern("\\b\\d{4}[-]\\d{2}[-]\\d{2}\\b");
 
-	if (firstDateGreaterOrEqual(tempDate, FIRST_AVAILABLE_DATE)
-		&& firstDateGreaterOrEqual(thisMonthLastDate, tempDate))
+	if (std::regex_match(date, datePattern))
 	{
-		return true;
+		int tempDate;
+		tempDate = dateToInt(date);
+
+		if (firstDateGreaterOrEqual(tempDate, FIRST_AVAILABLE_DATE)
+			&& firstDateGreaterOrEqual(thisMonthLastDate, tempDate))
+		{
+			return true;
+		}
 	}
 	return false;
 }

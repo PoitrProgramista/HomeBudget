@@ -10,17 +10,6 @@ bool ExpenseFile::load()
 	return file.Load("expenses.xml");
 }
 
-ExpenseFile::~ExpenseFile()
-{
-	if (anyExpenses == true)
-		save();
-}
-
-void ExpenseFile::save()
-{
-	file.Save("expenses.xml");
-}
-
 bool ExpenseFile::areThereAnyExpenses()
 {
 	return anyExpenses;
@@ -51,4 +40,11 @@ void ExpenseFile::add(std::string& date, std::string & item, std::string& amount
 	file.AddChildElem("date", date);
 	file.AddChildElem("item", item);
 	file.AddChildElem("amount", amount);
+
+	save();
+}
+
+void ExpenseFile::save()
+{
+	file.Save("expenses.xml");
 }

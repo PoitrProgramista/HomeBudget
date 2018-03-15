@@ -11,15 +11,11 @@ bool UserFile::load()
 	return file.Load("users.xml");
 }
 
-UserFile::~UserFile()
-{
-	save();
-}
-
 void UserFile::save()
 {
 	file.Save("users.xml");
 }
+
 
 void UserFile::add(std::string & name, std::string & surname, std::string & login, std::string & password)
 {
@@ -45,6 +41,8 @@ void UserFile::add(std::string & name, std::string & surname, std::string & logi
 	file.AddChildElem("password", password);
 	file.AddChildElem("name", name);
 	file.AddChildElem("surname", surname);
+
+	save();
 }
 
 bool UserFile::validate(std::string & login, std::string & password)

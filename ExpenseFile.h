@@ -8,7 +8,6 @@ class ExpenseFile :
 
 public:
 	ExpenseFile();
-	~ExpenseFile();
 	bool areThereAnyExpenses();
 	virtual bool load() override;
 	virtual void save() override;

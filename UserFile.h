@@ -9,7 +9,6 @@ class UserFile : public File
 	User findByLogin(std::string& providedLogin);
 public:
 	UserFile();
-	~UserFile();
 	virtual void save() override;
 	virtual bool load() override;
 	void changePassword(std::string& providedPassword);

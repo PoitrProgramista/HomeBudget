@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <Windows.h>
+#include <regex>
 #include "Prompt.h"
 
 class Date

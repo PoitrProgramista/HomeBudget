@@ -10,17 +10,6 @@ bool IncomeFile::load()
 	return file.Load("incomes.xml");
 }
 
-IncomeFile::~IncomeFile()
-{
-	if (anyIncomes == true)
-		save();
-}
-
-void IncomeFile::save()
-{
-	file.Save("incomes.xml");
-}
-
 bool IncomeFile::areThereAnyIncomes()
 {
 	return anyIncomes;
@@ -51,4 +40,11 @@ void IncomeFile::add(std::string& date, std::string & item, std::string& amount)
 	file.AddChildElem("date", date);
 	file.AddChildElem("item", item);
 	file.AddChildElem("amount", amount);
+
+	save();
+}
+
+void IncomeFile::save()
+{
+	file.Save("incomes.xml");
 }

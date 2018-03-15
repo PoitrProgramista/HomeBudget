@@ -72,13 +72,24 @@ void UserMenu::addIncome()
 	std::cin.ignore();
 	std::getline(std::cin, item);
 
-	system("cls");
-	prompt("DODAWANIE DOCHODU\n");
-	promptAndGet("Prosze podac kwote: ", amount);
+	bool amountValid = false;
 
-	formatAmount(amount);
+	while (amountValid == false)
+	{
+		system("cls");
+		prompt("DODAWANIE DOCHODU\n");
+		promptAndGet("Prosze podac kwote: ", amount);
 
-	incomeFile.add(date, item, amount);
+		amountValid = verifyAmount(amount);
+
+		if (amountValid)
+			incomeFile.add(date, item, amount);
+		else
+		{
+			system("cls");
+			promptAndWait("Prosze podac poprawna kwote");
+		}
+	}
 }
 
 void UserMenu::addExpense()
@@ -100,7 +111,7 @@ void UserMenu::addExpense()
 	prompt("DODAWANIE WYDATKU\n");
 	promptAndGet("Prosze podac kwote: ", amount);
 
-	formatAmount(amount);
+	verifyAmount(amount);
 
 	expenseFile.add(date, item, amount);
 }
@@ -126,11 +137,18 @@ void UserMenu::displayDateChoice(std::string& date)
 	}
 }
 
-void UserMenu::formatAmount(std::string & amount)
+bool UserMenu::verifyAmount(std::string & amount)
 {
-	size_t dotPosition = amount.find(",");
-	if (dotPosition != std::string::npos)
-		amount.replace(dotPosition, 1, ".");
+	std::regex amountPattern("^[0-9]+([,.][0-9]{1,2})?");
+
+	if (std::regex_match(amount, amountPattern))
+	{
+		size_t dotPosition = amount.find(",");
+		if (dotPosition != std::string::npos)
+			amount.replace(dotPosition, 1, ".");
+		return true;
+	}
+	return false;
 }
 
 void UserMenu::thisMonthBill()

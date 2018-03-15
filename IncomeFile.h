@@ -8,7 +8,6 @@ class IncomeFile :
 
 public:
 	IncomeFile();
-	~IncomeFile();
 	bool areThereAnyIncomes();
 	virtual void save() override;
 	virtual bool load() override;

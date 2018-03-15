@@ -22,7 +22,7 @@ class UserMenu
 	void thisMonthBill();
 	void billForPeriod();
 	void changePassword();
-	void formatAmount(std::string& amount);
+	bool verifyAmount(std::string& amount);
 	void displayDateChoice(std::string& date);
 	bool logout();
 
